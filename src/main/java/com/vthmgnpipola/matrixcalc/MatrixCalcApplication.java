@@ -25,8 +25,8 @@ public class MatrixCalcApplication {
         Scanner scanner = new Scanner(System.in);
         while (executando) {
             int quantidadeMatrizes = RegistroMatrizes.getQuantidadeMatrizes();
-            System.out.print(quantidadeMatrizes + (quantidadeMatrizes == 1 ? " matriz" : " matrizes") + " registradas" +
-                    " > ");
+            System.out.print(quantidadeMatrizes + (quantidadeMatrizes == 1 ? " matriz registrada" : " matrizes " +
+                    "registradas") + " > ");
             String linha = scanner.nextLine();
 
             RegistroComandos.executarSeExistente(linha);

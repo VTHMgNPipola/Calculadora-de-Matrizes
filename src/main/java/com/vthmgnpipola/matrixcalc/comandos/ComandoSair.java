@@ -6,7 +6,7 @@ import com.vthmgnpipola.matrixcalc.MatrixCalcApplication;
 public class ComandoSair implements Comando {
     @Override
     public boolean checarArgumentos(String args) {
-        return false;
+        return true;
     }
 
     @Override

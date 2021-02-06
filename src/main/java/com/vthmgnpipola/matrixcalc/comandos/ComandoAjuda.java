@@ -15,7 +15,8 @@ public class ComandoAjuda implements Comando {
 
         Map<String, Comando> comandos = RegistroComandos.getComandos();
         for (Map.Entry<String, Comando> comando : comandos.entrySet()) {
-            System.out.println(comando.getKey() + ": " + comando.getValue().getDescricao());
+            System.out.println(ANSI_BOLD + ANSI_YELLOW + comando.getKey() + ANSI_RESET + ": "
+                    + comando.getValue().getDescricao());
         }
 
         System.out.println();

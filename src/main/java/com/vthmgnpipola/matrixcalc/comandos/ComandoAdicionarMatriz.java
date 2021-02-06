@@ -63,7 +63,6 @@ public class ComandoAdicionarMatriz implements Comando {
                 * o símbolo '}'
                 * o símbolo ';'
                Note que uma quantidade arbitrária de caracteres de espaçamento (espaços, tabs, etc) pode estar entre
-               qualquer elemento apresentado acima.
-               """;
+               qualquer elemento apresentado acima.""";
     }
 }

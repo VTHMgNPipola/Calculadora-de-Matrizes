@@ -7,8 +7,8 @@ import java.util.regex.MatchResult;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-@ComandoRegistrado("regmat")
-public class ComandoRegistrarMatriz implements Comando {
+@ComandoRegistrado("admat")
+public class ComandoAdicionarMatriz implements Comando {
     private static final String REGEX_NUMERO = "-?\\d+(\\.\\d+)?";
     private static final Pattern PATTERN_NUMERO = Pattern.compile(REGEX_NUMERO);
 
@@ -50,6 +50,20 @@ public class ComandoRegistrarMatriz implements Comando {
 
     @Override
     public String getDescricao() {
-        return null;
+        return """
+               Adiciona uma matriz, que poderá então ser utilizada em cálculos.
+               A sintaxe para adicionar a matriz é:
+                * o nome da matriz (qualquer combinação de letras latinas maiúsculas ou minúsculas
+                * o símbolo '='
+                * os dados da matriz
+               Os dados da matriz são representados da seguinte forma:
+                * o símbolo '{'
+                * os números da linha, onde o delimitador decimal é o ponto '.', e o delimitador entre valores é a
+                  vírgula ','
+                * o símbolo '}'
+                * o símbolo ';'
+               Note que uma quantidade arbitrária de caracteres de espaçamento (espaços, tabs, etc) pode estar entre
+               qualquer elemento apresentado acima.
+               """;
     }
 }

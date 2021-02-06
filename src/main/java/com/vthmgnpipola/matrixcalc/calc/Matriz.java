@@ -1,7 +1,7 @@
 package com.vthmgnpipola.matrixcalc.calc;
 
 public class Matriz {
-    private double[][] dados;
+    private final double[][] dados;
 
     public Matriz(double[][] dados) {
         this.dados = dados;
@@ -13,5 +13,13 @@ public class Matriz {
 
     public void set(int x, int y, double valor) {
         dados[y][x] = valor;
+    }
+
+    public int linhas() {
+        return dados.length;
+    }
+
+    public int colunas() {
+        return dados[0].length;
     }
 }

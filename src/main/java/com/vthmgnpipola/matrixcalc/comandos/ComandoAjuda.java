@@ -5,7 +5,12 @@ import java.util.Map;
 @ComandoRegistrado("ajuda")
 public class ComandoAjuda implements Comando {
     @Override
-    public void executar(String[] args) {
+    public boolean checarArgumentos(String args) {
+        return true;
+    }
+
+    @Override
+    public void executar(String args) {
         System.out.println("\nComandos disponíveis e suas descrições:");
 
         Map<String, Comando> comandos = RegistroComandos.getComandos();

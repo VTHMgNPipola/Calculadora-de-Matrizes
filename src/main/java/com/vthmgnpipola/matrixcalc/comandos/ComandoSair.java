@@ -5,7 +5,12 @@ import com.vthmgnpipola.matrixcalc.MatrixCalcApplication;
 @ComandoRegistrado("sair")
 public class ComandoSair implements Comando {
     @Override
-    public void executar(String[] args) {
+    public boolean checarArgumentos(String args) {
+        return false;
+    }
+
+    @Override
+    public void executar(String args) {
         MatrixCalcApplication.sair();
     }
 

@@ -25,7 +25,17 @@ public class RegistroComandos {
         String[] partes = linha.split("\s+");
         Comando comando = procurar(partes[0]);
         if (comando != null) {
-            comando.executar(Arrays.copyOfRange(partes, 1, partes.length));
+            String args = String.join(" ", Arrays.copyOfRange(partes, 1, partes.length));
+            if (comando.checarArgumentos(args)) {
+                try {
+                    comando.executar(args);
+                } catch (ComandoException e) {
+                    System.out.println("Um erro ocorreu executando o comando! Log abaixo:\n");
+                    e.printStackTrace();
+                }
+            } else {
+                System.out.println("Sintaxe do comando inválida!");
+            }
         } else {
             System.out.println("Comando '" + partes[0] + "' não encontrado! Utilize o comando 'ajuda' para saber a " +
                     "lista de comandos disponíveis.");

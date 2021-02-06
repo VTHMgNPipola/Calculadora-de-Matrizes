@@ -1,7 +1,9 @@
 package com.vthmgnpipola.matrixcalc.comandos;
 
 public interface Comando {
-    void executar(String[] args);
+    boolean checarArgumentos(String args);
+
+    void executar(String args) throws ComandoException;
 
     String getDescricao();
 }

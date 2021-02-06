@@ -35,6 +35,9 @@ public class ComandoListar implements Comando {
 
     @Override
     public String getDescricao() {
-        return null;
+        return """
+               Lista matrizes na memória da calculadora de matrizes.
+               Para listar todas as matrizes, só é necessário chamar o comando sem qualquer argumentos. Para listar
+               matrizes específicas, coloque o nome das matrizes que serão listadas, separados por espaço.""";
     }
 }

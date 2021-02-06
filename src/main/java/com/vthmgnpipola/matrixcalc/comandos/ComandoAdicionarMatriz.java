@@ -7,7 +7,7 @@ import java.util.regex.MatchResult;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-@ComandoRegistrado("admat")
+@ComandoRegistrado("adicionar")
 public class ComandoAdicionarMatriz implements Comando {
     private static final String REGEX_NUMERO = "-?\\d+(\\.\\d+)?";
     private static final Pattern PATTERN_NUMERO = Pattern.compile(REGEX_NUMERO);

@@ -14,7 +14,7 @@ public class ComandoAdicionarSubtrairUtils {
         List<Matriz> matrizes = new ArrayList<>();
         String nomeMatrizResultante = null;
         for (int i = 0; i < partes.length; i++) {
-            if (partes[i].equals("-para")) {
+            if (partes[i].equals(">")) {
                 nomeMatrizResultante = partes[i + 1];
                 break;
             }

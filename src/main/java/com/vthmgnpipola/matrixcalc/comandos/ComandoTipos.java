@@ -3,18 +3,26 @@ package com.vthmgnpipola.matrixcalc.comandos;
 import com.vthmgnpipola.matrixcalc.calc.Matriz;
 import com.vthmgnpipola.matrixcalc.calc.RegistroMatrizes;
 import java.util.List;
+import java.util.Set;
 import java.util.StringJoiner;
 
 @ComandoRegistrado("tipos")
 public class ComandoTipos implements Comando {
     @Override
     public boolean checarArgumentos(String args) {
-        return args.matches("[a-zA-Z]+(\s+[a-zA-Z]+)*");
+        return args.isEmpty() || args.matches("[a-zA-Z]+(\s+[a-zA-Z]+)*");
     }
 
     @Override
     public void executar(String args) throws ComandoException {
-        String[] nomesMatrizes = args.split("\s+");
+        String[] nomesMatrizes;
+        if (args.isEmpty()) {
+            Set<String> nomesSet = RegistroMatrizes.getMatrizes().keySet();
+            nomesMatrizes = new String[nomesSet.size()];
+            nomesMatrizes = nomesSet.toArray(nomesMatrizes);
+        } else {
+            nomesMatrizes = args.split("\s+");
+        }
 
         for (String nomeMatriz : nomesMatrizes) {
             Matriz matriz = RegistroMatrizes.getMatriz(nomeMatriz);
@@ -40,7 +48,8 @@ public class ComandoTipos implements Comando {
     @Override
     public String getDescricao() {
         return """
-               Calcula e exibe o tipo das matrizes especificadas. Para especificar matrizes para serem analisadas,
-               insira os nomes da matrizes como argumentos a este comando, separados por espaços.""";
+               Calcula e exibe o tipo das matrizes especificadas, ou de todas as matrizes se nenhuma for especificada.
+               Para especificar matrizes para serem analisadas, insira os nomes da matrizes como argumentos a este
+               comando, separados por espaços.""";
     }
 }

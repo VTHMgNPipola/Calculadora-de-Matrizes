@@ -11,7 +11,7 @@ public class ComandoAjuda implements Comando {
 
     @Override
     public void executar(String args) {
-        System.out.println("\nComandos disponíveis e suas descrições:");
+        System.out.println(ANSI_BOLD + "\nComandos disponíveis e suas descrições:" + ANSI_RESET);
 
         Map<String, Comando> comandos = RegistroComandos.getComandos();
         for (Map.Entry<String, Comando> comando : comandos.entrySet()) {

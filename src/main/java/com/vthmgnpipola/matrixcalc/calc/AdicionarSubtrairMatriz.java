@@ -1,8 +1,8 @@
 package com.vthmgnpipola.matrixcalc.calc;
 
-public class AdicionarMatriz implements CalculadoraMatrizStrategy<Matriz> {
+public class AdicionarSubtrairMatriz implements CalculadoraMatrizStrategy<Matriz, AdicionarSubtrairMatrizOptions> {
     @Override
-    public Matriz calcular(Matriz[] matrizes) {
+    public Matriz calcular(Matriz[] matrizes, AdicionarSubtrairMatrizOptions opts) {
         if (matrizes.length < 2) {
             throw new CalculadoraException("É necessário haver pelo menos 2 matrizes para serem adicionadas!");
         }
@@ -19,7 +19,15 @@ public class AdicionarMatriz implements CalculadoraMatrizStrategy<Matriz> {
 
             for (int y = 0; y < matriz.linhas(); y++) {
                 for (int x = 0; x < matriz.colunas(); x++) {
-                    resultado.set(x, y, resultado.get(x, y) + matriz.get(x, y));
+                    double valorFinal = resultado.get(x, y);
+                    double valorMatriz = matriz.get(x, y);
+                    if (opts.subtrair) {
+                        valorFinal -= valorMatriz;
+                    } else {
+                        valorFinal += valorMatriz;
+                    }
+
+                    resultado.set(x, y, valorFinal);
                 }
             }
         }

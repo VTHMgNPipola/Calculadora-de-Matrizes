@@ -31,7 +31,7 @@ public class ComandoTipos implements Comando {
                 tipos.add("Nenhum");
             }
 
-            System.out.println(ANSI_YELLOW + "Tipos da matriz " + ANSI_BOLD + nomeMatriz + ":" + ANSI_RESET);
+            System.out.println(ANSI_YELLOW + "Tipos da matriz " + ANSI_BOLD + nomeMatriz + ANSI_RESET + ":");
             System.out.println(tipos.toString());
             System.out.println();
         }

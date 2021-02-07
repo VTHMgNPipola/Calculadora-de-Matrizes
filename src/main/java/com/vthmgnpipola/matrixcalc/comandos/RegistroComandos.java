@@ -1,14 +1,17 @@
 package com.vthmgnpipola.matrixcalc.comandos;
 
 import com.vthmgnpipola.matrixcalc.calc.CalculadoraException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import org.reflections.Reflections;
 
 public class RegistroComandos {
     private static final Map<String, Comando> comandos = new HashMap<>();
+    private static final List<String> historico = new ArrayList<>();
 
     public static void registrarComando(String chave, Comando comando) {
         comandos.put(chave, comando);
@@ -16,6 +19,10 @@ public class RegistroComandos {
 
     public static Map<String, Comando> getComandos() {
         return new HashMap<>(comandos);
+    }
+
+    public static List<String> getHistorico() {
+        return new ArrayList<>(historico);
     }
 
     public static Comando procurar(String chave) {
@@ -30,6 +37,7 @@ public class RegistroComandos {
             if (comando.checarArgumentos(args)) {
                 try {
                     comando.executar(args);
+                    historico.add(linha);
                 } catch (ComandoException | CalculadoraException e) {
                     System.out.println("Um erro ocorreu executando o comando! Log abaixo:\n");
                     e.printStackTrace();

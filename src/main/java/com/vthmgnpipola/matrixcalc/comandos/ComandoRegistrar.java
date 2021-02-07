@@ -7,8 +7,8 @@ import java.util.regex.MatchResult;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-@ComandoRegistrado("adicionar")
-public class ComandoAdicionarMatriz implements Comando {
+@ComandoRegistrado("registrar")
+public class ComandoRegistrar implements Comando {
     private static final String REGEX_NUMERO = "-?\\d+(\\.\\d+)?";
     private static final Pattern PATTERN_NUMERO = Pattern.compile(REGEX_NUMERO);
 
@@ -45,7 +45,7 @@ public class ComandoAdicionarMatriz implements Comando {
         }
 
         Matriz matriz = new Matriz(linhas);
-        RegistroMatrizes.adicionarMatriz(nome, matriz);
+        RegistroMatrizes.registrarMatriz(nome, matriz);
     }
 
     @Override

@@ -8,7 +8,7 @@ import java.util.StringJoiner;
 public class RegistroMatrizes {
     private static final Map<String, Matriz> matrizes = new HashMap<>();
 
-    public static void adicionarMatriz(String nome, Matriz matriz) {
+    public static void registrarMatriz(String nome, Matriz matriz) {
         matrizes.put(nome, matriz);
     }
 
@@ -29,7 +29,10 @@ public class RegistroMatrizes {
     }
 
     public static String getMatrizString(String nome) throws ComandoException {
-        Matriz matriz = matrizes.get(nome);
+        return getMatrizString(nome, getMatriz(nome));
+    }
+
+    public static String getMatrizString(String nome, Matriz matriz) throws ComandoException {
         if (matriz == null) {
             throw new ComandoException("A matriz '" + nome + "' não existe!");
         }

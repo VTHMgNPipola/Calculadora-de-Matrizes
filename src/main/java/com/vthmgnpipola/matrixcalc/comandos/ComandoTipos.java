@@ -31,7 +31,7 @@ public class ComandoTipos implements Comando {
                 tipos.add("Nenhum");
             }
 
-            System.out.println(ANSI_BOLD + ANSI_YELLOW + "Tipos da matriz " + nomeMatriz + ":" + ANSI_RESET);
+            System.out.println(ANSI_YELLOW + "Tipos da matriz " + ANSI_BOLD + nomeMatriz + ":" + ANSI_RESET);
             System.out.println(tipos.toString());
             System.out.println();
         }
@@ -39,6 +39,8 @@ public class ComandoTipos implements Comando {
 
     @Override
     public String getDescricao() {
-        return null;
+        return """
+               Calcula e exibe o tipo das matrizes especificadas. Para especificar matrizes para serem analisadas,
+               insira os nomes da matrizes como argumentos a este comando, separados por espaços.""";
     }
 }

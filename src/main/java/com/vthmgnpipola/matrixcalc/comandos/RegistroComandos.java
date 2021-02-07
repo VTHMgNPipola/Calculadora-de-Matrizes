@@ -1,5 +1,6 @@
 package com.vthmgnpipola.matrixcalc.comandos;
 
+import com.vthmgnpipola.matrixcalc.calc.CalculadoraException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -29,7 +30,7 @@ public class RegistroComandos {
             if (comando.checarArgumentos(args)) {
                 try {
                     comando.executar(args);
-                } catch (ComandoException e) {
+                } catch (ComandoException | CalculadoraException e) {
                     System.out.println("Um erro ocorreu executando o comando! Log abaixo:\n");
                     e.printStackTrace();
                 }

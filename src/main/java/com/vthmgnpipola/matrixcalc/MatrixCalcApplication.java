@@ -1,6 +1,7 @@
 package com.vthmgnpipola.matrixcalc;
 
 import com.vthmgnpipola.matrixcalc.calc.RegistroMatrizes;
+import com.vthmgnpipola.matrixcalc.comandos.Comando;
 import com.vthmgnpipola.matrixcalc.comandos.RegistroComandos;
 import java.util.Scanner;
 
@@ -25,8 +26,9 @@ public class MatrixCalcApplication {
         Scanner scanner = new Scanner(System.in);
         while (executando) {
             int quantidadeMatrizes = RegistroMatrizes.getQuantidadeMatrizes();
-            System.out.print(quantidadeMatrizes + (quantidadeMatrizes == 1 ? " matriz registrada" : " matrizes " +
-                    "registradas") + " > ");
+            System.out.print(Comando.ANSI_BOLD + Comando.ANSI_BLUE + quantidadeMatrizes + Comando.ANSI_RESET +
+                    Comando.ANSI_BLUE + (quantidadeMatrizes == 1 ? " matriz registrada" : " matrizes registradas") +
+                    Comando.ANSI_RESET + Comando.ANSI_BOLD + Comando.ANSI_RED + " > " + Comando.ANSI_RESET);
             String linha = scanner.nextLine();
 
             RegistroComandos.executarSeExistente(linha);

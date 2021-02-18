@@ -40,7 +40,9 @@ public class ComandoImportar implements Comando {
 
         // Executa todos os comandos
         for (String comando : comandos) {
-            RegistroComandos.executarSeExistente(comando);
+            if (RegistroComandos.isExportavel(comando.split("\s+")[0])) {
+                RegistroComandos.executarSeExistente(comando);
+            }
         }
 
         // Reabilita o System.out.

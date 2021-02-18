@@ -33,7 +33,7 @@ public class ComandoRemover implements Comando {
         if (escalaresRemovidos == 1) {
             System.out.println("1 escalar removido.");
         } else {
-            System.out.println(matrizesRemovidas + " escalares removidos.");
+            System.out.println(escalaresRemovidos + " escalares removidos.");
         }
 
         System.out.println();

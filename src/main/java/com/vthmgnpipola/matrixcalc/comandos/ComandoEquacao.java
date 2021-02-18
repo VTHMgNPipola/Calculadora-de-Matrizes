@@ -40,6 +40,16 @@ public class ComandoEquacao implements Comando {
 
     @Override
     public String getDescricao() {
-        return null;
+        return """
+               Executa uma equação do EJML.
+               EJML é a biblioteca de manipulação de matrizes que essa calculadora de matrizes utiliza, e ela conta com
+               um sistema de equações para manipular mais facilmente as matrizes.
+               Para executar uma equação e imprimir o resultado do próprio EJML, insira a equação sem um nome para
+               retorno (ou seja, sem um nome de matriz ou valor escalar e um símbolo '='). O resultado impresso não será
+               de acordo com os padrões da calculadora de matrizes, então esteja atento a isso.
+               Para executar uma equação e não imprimir o resultado, mas sim armazená-lo em uma variável (seja ele
+               escalar ou uma matriz), insira o nome da variável a ser criada/atualizada e o símbolo '=', com qualquer
+               quantidade de espaços entre os símbolos.
+               """;
     }
 }

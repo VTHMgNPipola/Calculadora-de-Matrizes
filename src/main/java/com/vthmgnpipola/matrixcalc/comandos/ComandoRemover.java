@@ -1,10 +1,9 @@
 package com.vthmgnpipola.matrixcalc.comandos;
 
-import com.vthmgnpipola.matrixcalc.calc.Matriz;
-import com.vthmgnpipola.matrixcalc.calc.RegistroMatrizes;
+import com.vthmgnpipola.matrixcalc.calc.MatrizHelper;
 
 @ComandoRegistrado("remover")
-public class ComandoRemoverMatriz implements Comando {
+public class ComandoRemover implements Comando {
     @Override
     public boolean checarArgumentos(String args) {
         return args.matches("[a-zA-Z]+(\s+[a-zA-Z]+)*");
@@ -12,12 +11,16 @@ public class ComandoRemoverMatriz implements Comando {
 
     @Override
     public void executar(String args) {
-        String[] matrizes = args.split("\s*");
+        String[] partes = args.split("\s*");
         int matrizesRemovidas = 0;
-        for (String matriz : matrizes) {
-            Matriz removida = RegistroMatrizes.removerMatriz(matriz);
-            if (removida != null) {
+        int escalaresRemovidos = 0;
+        for (String parte : partes) {
+            if (MatrizHelper.getMatrizes().containsKey(parte)) {
+                MatrizHelper.getMatrizes().remove(parte);
                 matrizesRemovidas++;
+            } else if (MatrizHelper.getEscalares().containsKey(parte)) {
+                MatrizHelper.getEscalares().remove(parte);
+                escalaresRemovidos++;
             }
         }
 
@@ -25,6 +28,12 @@ public class ComandoRemoverMatriz implements Comando {
             System.out.println("1 matriz removida.");
         } else {
             System.out.println(matrizesRemovidas + " matrizes removidas.");
+        }
+
+        if (escalaresRemovidos == 1) {
+            System.out.println("1 escalar removido.");
+        } else {
+            System.out.println(matrizesRemovidas + " escalares removidos.");
         }
 
         System.out.println();

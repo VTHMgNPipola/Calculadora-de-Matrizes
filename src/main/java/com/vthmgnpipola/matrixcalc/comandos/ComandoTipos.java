@@ -1,10 +1,11 @@
 package com.vthmgnpipola.matrixcalc.comandos;
 
-import com.vthmgnpipola.matrixcalc.calc.Matriz;
-import com.vthmgnpipola.matrixcalc.calc.RegistroMatrizes;
+import com.vthmgnpipola.matrixcalc.calc.MatrizHelper;
+import com.vthmgnpipola.matrixcalc.calc.TipoMatriz;
 import java.util.List;
 import java.util.Set;
 import java.util.StringJoiner;
+import org.ejml.data.DMatrixRMaj;
 
 @ComandoRegistrado("tipos")
 public class ComandoTipos implements Comando {
@@ -17,7 +18,7 @@ public class ComandoTipos implements Comando {
     public void executar(String args) throws ComandoException {
         String[] nomesMatrizes;
         if (args.isEmpty()) {
-            Set<String> nomesSet = RegistroMatrizes.getMatrizes().keySet();
+            Set<String> nomesSet = MatrizHelper.getMatrizes().keySet();
             nomesMatrizes = new String[nomesSet.size()];
             nomesMatrizes = nomesSet.toArray(nomesMatrizes);
         } else {
@@ -25,14 +26,14 @@ public class ComandoTipos implements Comando {
         }
 
         for (String nomeMatriz : nomesMatrizes) {
-            Matriz matriz = RegistroMatrizes.getMatriz(nomeMatriz);
+            DMatrixRMaj matriz = MatrizHelper.getMatrizes().get(nomeMatriz);
             if (matriz == null) {
                 throw new ComandoException("A matriz '" + nomeMatriz + "' não existe!");
             }
 
             // Calcula os tipos
             StringJoiner tipos = new StringJoiner(", ");
-            List<Matriz.TipoMatriz> tiposList = matriz.getTipos();
+            List<TipoMatriz> tiposList = MatrizHelper.getTipos(matriz);
             if (!tiposList.isEmpty()) {
                 tiposList.forEach(t -> tipos.add(t.toString()));
             } else {

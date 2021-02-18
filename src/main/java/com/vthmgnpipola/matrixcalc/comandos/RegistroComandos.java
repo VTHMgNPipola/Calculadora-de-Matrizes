@@ -1,6 +1,5 @@
 package com.vthmgnpipola.matrixcalc.comandos;
 
-import com.vthmgnpipola.matrixcalc.calc.CalculadoraException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -38,7 +37,7 @@ public class RegistroComandos {
                 try {
                     comando.executar(args);
                     historico.add(linha);
-                } catch (ComandoException | CalculadoraException e) {
+                } catch (ComandoException e) {
                     System.out.println("Um erro ocorreu executando o comando! Log abaixo:\n");
                     e.printStackTrace();
                 }
@@ -52,7 +51,8 @@ public class RegistroComandos {
     }
 
     /**
-     * Registra todos os comandos, ou seja, classes que implementam a interface {@link Comando}.
+     * Registra todos os comandos, ou seja, classes que implementam a interface {@link Comando}. Todos os comandos devem
+     * estar dentro do pacote com.vthmgnpipola.matrixcalc.comandos.
      */
     public static void registrarComandos() {
         comandos.clear();

@@ -1,7 +1,8 @@
 package com.vthmgnpipola.matrixcalc.comandos;
 
-import com.vthmgnpipola.matrixcalc.calc.RegistroMatrizes;
-import java.util.Set;
+import com.vthmgnpipola.matrixcalc.calc.MatrizHelper;
+import java.util.ArrayList;
+import java.util.List;
 
 @ComandoRegistrado("listar")
 public class ComandoListar implements Comando {
@@ -12,24 +13,38 @@ public class ComandoListar implements Comando {
 
     @Override
     public void executar(String args) throws ComandoException {
-        String[] nomesMatrizes;
+        String[] nomes;
         if (args.isEmpty()) {
-            Set<String> setMatrizes = RegistroMatrizes.getMatrizes().keySet();
-            nomesMatrizes = new String[setMatrizes.size()];
-            nomesMatrizes = setMatrizes.toArray(nomesMatrizes);
-
+            List<String> nomesList = new ArrayList<>(MatrizHelper.getMatrizes().keySet());
+            nomesList.addAll(MatrizHelper.getEscalares().keySet());
+            nomes = new String[nomesList.size()];
+            nomes = nomesList.toArray(nomes);
         } else {
-            nomesMatrizes = args.split("\s*");
+            nomes = args.split("\s*");
         }
 
-        for (String nome : nomesMatrizes) {
-            System.out.println(RegistroMatrizes.getMatrizString(nome));
+        int matrizesListadas = 0;
+        int escalaresListados = 0;
+        for (String nome : nomes) {
+            if (MatrizHelper.getMatrizes().containsKey(nome)) {
+                System.out.println(MatrizHelper.lookupMatrizString(nome));
+                matrizesListadas++;
+            } else if (MatrizHelper.getEscalares().containsKey(nome)) {
+                System.out.println(MatrizHelper.lookupEscalarString(nome));
+                escalaresListados++;
+            }
         }
 
-        if (nomesMatrizes.length == 1) {
-            System.out.println("1 matriz listada");
+        if (matrizesListadas == 1) {
+            System.out.println("1 matriz listada.");
         } else {
-            System.out.println(nomesMatrizes.length + " matrizes listadas");
+            System.out.println(matrizesListadas + " matrizes listadas.");
+        }
+
+        if (escalaresListados == 1) {
+            System.out.println("1 escalar listado.");
+        } else {
+            System.out.println(escalaresListados + " escalares listados.");
         }
     }
 

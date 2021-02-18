@@ -9,4 +9,5 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 public @interface ComandoRegistrado {
     String value();
+    boolean exportavel() default true;
 }

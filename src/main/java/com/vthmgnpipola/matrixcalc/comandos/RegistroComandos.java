@@ -10,10 +10,12 @@ import org.reflections.Reflections;
 
 public class RegistroComandos {
     private static final Map<String, Comando> comandos = new HashMap<>();
+    private static final Map<String, Boolean> comandosExportaveis = new HashMap<>();
     private static final List<String> historico = new ArrayList<>();
 
-    public static void registrarComando(String chave, Comando comando) {
+    public static void registrarComando(String chave, boolean exportavel, Comando comando) {
         comandos.put(chave, comando);
+        comandosExportaveis.put(chave, exportavel);
     }
 
     public static Map<String, Comando> getComandos() {
@@ -26,6 +28,10 @@ public class RegistroComandos {
 
     public static Comando procurar(String chave) {
         return comandos.get(chave);
+    }
+
+    public static boolean isExportavel(String chave) {
+        return comandosExportaveis.get(chave);
     }
 
     public static void executarSeExistente(String linha) {
@@ -66,8 +72,9 @@ public class RegistroComandos {
 
             ComandoRegistrado comandoRegistrado = comando.getAnnotation(ComandoRegistrado.class);
             String chaveComando = comandoRegistrado.value();
+            boolean exportavel = comandoRegistrado.exportavel();
             try {
-                registrarComando(chaveComando, (Comando) comando.getConstructor().newInstance());
+                registrarComando(chaveComando, exportavel, (Comando) comando.getConstructor().newInstance());
             } catch (Exception e) {
                 e.printStackTrace();
                 throw new RuntimeException("Não foi possível instanciar o comando '" + chaveComando + "'! Todos os " +

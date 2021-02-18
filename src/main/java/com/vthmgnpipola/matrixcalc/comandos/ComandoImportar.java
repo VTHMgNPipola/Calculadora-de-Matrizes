@@ -7,7 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
-@ComandoRegistrado("importar")
+@ComandoRegistrado(value = "importar", exportavel = false)
 public class ComandoImportar implements Comando {
     @Override
     public boolean checarArgumentos(String args) {

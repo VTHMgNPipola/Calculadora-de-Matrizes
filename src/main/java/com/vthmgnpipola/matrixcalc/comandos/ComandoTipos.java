@@ -7,7 +7,7 @@ import java.util.Set;
 import java.util.StringJoiner;
 import org.ejml.data.DMatrixRMaj;
 
-@ComandoRegistrado("tipos")
+@ComandoRegistrado(value = "tipos", exportavel = false)
 public class ComandoTipos implements Comando {
     @Override
     public boolean checarArgumentos(String args) {

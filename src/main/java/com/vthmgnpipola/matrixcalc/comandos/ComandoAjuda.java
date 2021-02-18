@@ -2,7 +2,7 @@ package com.vthmgnpipola.matrixcalc.comandos;
 
 import java.util.Map;
 
-@ComandoRegistrado("ajuda")
+@ComandoRegistrado(value = "ajuda", exportavel = false)
 public class ComandoAjuda implements Comando {
     @Override
     public boolean checarArgumentos(String args) {

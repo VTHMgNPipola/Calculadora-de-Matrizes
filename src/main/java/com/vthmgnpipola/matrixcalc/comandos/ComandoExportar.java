@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-@ComandoRegistrado("exportar")
+@ComandoRegistrado(value = "exportar", exportavel = false)
 public class ComandoExportar implements Comando {
     @Override
     public boolean checarArgumentos(String args) {
@@ -34,7 +34,9 @@ public class ComandoExportar implements Comando {
 
         StringBuilder sb = new StringBuilder();
         for (String comando : RegistroComandos.getHistorico()) {
-            sb.append(comando).append("\n");
+            if (RegistroComandos.isExportavel(comando.split("\s+")[0])) {
+                sb.append(comando).append("\n");
+            }
         }
 
         try {

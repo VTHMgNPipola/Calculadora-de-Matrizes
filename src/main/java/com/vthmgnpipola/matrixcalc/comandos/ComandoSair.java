@@ -2,7 +2,7 @@ package com.vthmgnpipola.matrixcalc.comandos;
 
 import com.vthmgnpipola.matrixcalc.MatrixCalcApplication;
 
-@ComandoRegistrado("sair")
+@ComandoRegistrado(value = "sair", exportavel = false)
 public class ComandoSair implements Comando {
     @Override
     public boolean checarArgumentos(String args) {

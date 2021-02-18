@@ -4,7 +4,7 @@ import com.vthmgnpipola.matrixcalc.calc.MatrizHelper;
 import java.util.ArrayList;
 import java.util.List;
 
-@ComandoRegistrado("listar")
+@ComandoRegistrado(value = "listar", exportavel = false)
 public class ComandoListar implements Comando {
     @Override
     public boolean checarArgumentos(String args) {

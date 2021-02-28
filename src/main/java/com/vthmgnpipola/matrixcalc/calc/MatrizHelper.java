@@ -1,6 +1,7 @@
 package com.vthmgnpipola.matrixcalc.calc;
 
 import com.vthmgnpipola.matrixcalc.comandos.ComandoException;
+import com.vthmgnpipola.matrixcalc.funcoes.RegistroFuncoes;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -12,6 +13,13 @@ import org.ejml.equation.Equation;
 public class MatrizHelper {
     private static final Map<String, DMatrixRMaj> matrizes = new HashMap<>();
     private static final Map<String, Double> escalares = new HashMap<>();
+
+    public static final int MATRIZ_LATEX_SIMPLES = 0;
+    public static final int MATRIZ_LATEX_PARENTESES = 1;
+    public static final int MATRIZ_LATEX_COLCHETES = 2;
+    public static final int MATRIZ_LATEX_CHAVES = 3;
+    public static final int MATRIZ_LATEX_PIPES = 4;
+    public static final int MATRIZ_LATEX_DOUBLE_PIPES = 5;
 
     public static void registrar(String nome, DMatrixRMaj matriz) throws ComandoException {
         if (escalares.containsKey(nome)) {
@@ -29,6 +37,14 @@ public class MatrizHelper {
         escalares.put(nome, escalar);
     }
 
+    public static void removerMatriz(String nome) {
+        matrizes.remove(nome);
+    }
+
+    public static void removerEscalar(String nome) {
+        escalares.remove(nome);
+    }
+
     public static Map<String, DMatrixRMaj> getMatrizes() {
         return new HashMap<>(matrizes);
     }
@@ -41,6 +57,7 @@ public class MatrizHelper {
         Equation equation = new Equation();
         matrizes.forEach((nome, matriz) -> equation.alias(matriz, nome));
         escalares.forEach((nome, escalar) -> equation.alias(escalar, nome));
+        RegistroFuncoes.incluirFuncoes(equation.getFunctions());
         return equation;
     }
 
@@ -65,7 +82,7 @@ public class MatrizHelper {
         int[] tamanhoValores = new int[matriz.numCols];
         for (int x = 0; x < matriz.numCols; x++) {
             for (int y = 0; y < matriz.numRows; y++) {
-                String valorStr = matriz.get(x, y) + "";
+                String valorStr = matriz.get(y, x) + "";
                 if (valorStr.length() > tamanhoValores[x]) {
                     tamanhoValores[x] = valorStr.length();
                 }
@@ -87,7 +104,7 @@ public class MatrizHelper {
             // Cria a linha
             StringJoiner stringJoiner = new StringJoiner(", ");
             for (int x = 0; x < matriz.numCols; x++) {
-                stringJoiner.add(String.format("%1$" + tamanhoValores[x] + "s", matriz.get(x, y)));
+                stringJoiner.add(String.format("%1$" + tamanhoValores[x] + "s", matriz.get(y, x)));
             }
             sb.append(stringJoiner.toString()).append("]\n");
         }
@@ -95,8 +112,41 @@ public class MatrizHelper {
         return sb.toString();
     }
 
-    public static String getMatrizLatexString(String nome, DMatrixRMaj matriz) {
-        return null;
+    public static String getMatrizLatexString(String nome, DMatrixRMaj matriz, int estilo, boolean exibirNome)
+            throws ComandoException {
+        StringBuilder sb = new StringBuilder();
+
+        if (exibirNome) {
+            sb.append(nome).append(" = ");
+        }
+
+        String estiloString;
+        switch (estilo) {
+            case MATRIZ_LATEX_SIMPLES -> estiloString = "matrix";
+            case MATRIZ_LATEX_PARENTESES -> estiloString = "pmatrix";
+            case MATRIZ_LATEX_COLCHETES -> estiloString = "bmatrix";
+            case MATRIZ_LATEX_CHAVES -> estiloString = "Bmatrix";
+            case MATRIZ_LATEX_PIPES -> estiloString = "vmatrix";
+            case MATRIZ_LATEX_DOUBLE_PIPES -> estiloString = "Vmatrix";
+            default -> throw new ComandoException("Modo de renderização da matriz em LaTeX inválido!");
+        }
+
+        sb.append("\\begin{").append(estiloString).append("}\n");
+        for (int y = 0; y < matriz.numRows; y++) {
+            StringJoiner stringJoiner = new StringJoiner(" & ");
+            for (int x = 0; x < matriz.numCols; x++) {
+                stringJoiner.add(String.valueOf(matriz.get(y, x)));
+            }
+
+            sb.append(stringJoiner.toString());
+            if (y < matriz.numRows - 1) { // Se ainda não for a última linha
+                sb.append("\\\\"); // Insere os caracteres '\\'
+            }
+            sb.append("\n");
+        }
+        sb.append("\\end{").append(estiloString).append("}\n");
+
+        return sb.toString();
     }
 
     public static List<TipoMatriz> getTipos(DMatrixRMaj matriz) {

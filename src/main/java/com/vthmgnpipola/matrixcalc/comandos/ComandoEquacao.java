@@ -9,7 +9,7 @@ import org.ejml.equation.VariableScalar;
 
 @ComandoRegistrado("eq")
 public class ComandoEquacao implements Comando {
-    private static final Pattern PATTERN = Pattern.compile("[a-zA-Z]\s*=\s*.+");
+    private static final Pattern PATTERN = Pattern.compile("[a-zA-Z]+\s*=\s*.+");
 
     @Override
     public boolean checarArgumentos(String args) {
@@ -23,7 +23,12 @@ public class ComandoEquacao implements Comando {
             String[] partes = args.split("\s*=\s*");
             String nome = partes[0];
 
-            equacao.process(args);
+            try {
+                equacao.process(args);
+            } catch (Exception e) {
+                System.out.println("Ocorreu um erro processando a equação:");
+                System.out.println(e.getMessage());
+            }
 
             Variable variable = equacao.lookupVariable(nome);
             if (variable instanceof VariableMatrix) {
@@ -34,7 +39,12 @@ public class ComandoEquacao implements Comando {
                 throw new ComandoException("O tipo retornado da equação não é suportado!");
             }
         } else {
-            equacao.print(args);
+            try {
+                equacao.print(args);
+            } catch (Exception e) {
+                System.out.println("Ocorreu um erro processando a equação:");
+                System.out.println(e.getMessage());
+            }
         }
     }
 
@@ -49,7 +59,6 @@ public class ComandoEquacao implements Comando {
                de acordo com os padrões da calculadora de matrizes, então esteja atento a isso.
                Para executar uma equação e não imprimir o resultado, mas sim armazená-lo em uma variável (seja ele
                escalar ou uma matriz), insira o nome da variável a ser criada/atualizada e o símbolo '=', com qualquer
-               quantidade de espaços entre os símbolos.
-               """;
+               quantidade de espaços entre os símbolos.""";
     }
 }

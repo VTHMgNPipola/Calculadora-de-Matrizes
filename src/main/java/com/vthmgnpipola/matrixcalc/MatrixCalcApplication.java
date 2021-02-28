@@ -3,6 +3,7 @@ package com.vthmgnpipola.matrixcalc;
 import com.vthmgnpipola.matrixcalc.calc.MatrizHelper;
 import com.vthmgnpipola.matrixcalc.comandos.Comando;
 import com.vthmgnpipola.matrixcalc.comandos.RegistroComandos;
+import com.vthmgnpipola.matrixcalc.funcoes.RegistroFuncoes;
 import java.util.Scanner;
 
 public class MatrixCalcApplication {
@@ -22,6 +23,7 @@ public class MatrixCalcApplication {
         System.out.println("Digite 'ajuda' para exibir a lista de comandos.\n\n\n");
 
         RegistroComandos.registrarComandos();
+        RegistroFuncoes.registrarFuncoes();
 
         Scanner scanner = new Scanner(System.in);
         while (executando) {

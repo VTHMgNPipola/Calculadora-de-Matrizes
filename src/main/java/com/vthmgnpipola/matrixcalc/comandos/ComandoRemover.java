@@ -16,10 +16,10 @@ public class ComandoRemover implements Comando {
         int escalaresRemovidos = 0;
         for (String parte : partes) {
             if (MatrizHelper.getMatrizes().containsKey(parte)) {
-                MatrizHelper.getMatrizes().remove(parte);
+                MatrizHelper.removerMatriz(parte);
                 matrizesRemovidas++;
             } else if (MatrizHelper.getEscalares().containsKey(parte)) {
-                MatrizHelper.getEscalares().remove(parte);
+                MatrizHelper.removerEscalar(parte);
                 escalaresRemovidos++;
             }
         }

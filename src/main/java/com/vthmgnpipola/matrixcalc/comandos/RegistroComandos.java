@@ -45,7 +45,7 @@ public class RegistroComandos {
                     historico.add(linha);
                 } catch (ComandoException e) {
                     System.out.println("Um erro ocorreu executando o comando! Log abaixo:\n");
-                    e.printStackTrace();
+                    System.out.println(e.getMessage());
                 }
             } else {
                 System.out.println("Sintaxe do comando inválida!");
@@ -76,7 +76,7 @@ public class RegistroComandos {
             try {
                 registrarComando(chaveComando, exportavel, (Comando) comando.getConstructor().newInstance());
             } catch (Exception e) {
-                e.printStackTrace();
+                System.out.println(e.getMessage());
                 throw new RuntimeException("Não foi possível instanciar o comando '" + chaveComando + "'! Todos os " +
                         "comandos devem ter um construtor sem argumentos!");
             }
